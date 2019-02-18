@@ -7,20 +7,20 @@
     <script src="html5-qrcode.js"></script>
     <script>
       currentBalance = 1
-      var serialport = require('serialport');
-      var SerialPort = serialport.SerialPort;
-      var sp = new SerialPort("/dev/ttyACM0", {
-        baudrate: 9600,
-        parser: serialport.parsers.readline('\r\n')
-      });
-      sp.on("open", function () {
-        console.log('open');
-        sp.on('data', function(data) {
-            currentBalance = parseInt(currentBalance) + parseInt(data);
-            $("#currentBalance").html(accounting.formatMoney(currentBalance));
-            balanceUP();
-        });
-     });
+    //   var serialport = require('serialport.node');
+    //   var SerialPort = serialport.SerialPort;
+    //   var sp = new SerialPort("COM4", {
+    //     baudrate: 9600,
+    //     parser: serialport.parsers.readline('\r\n')
+    //   });
+    //   sp.on("open", function () {
+    //     console.log('open');
+    //     sp.on('data', function(data) {
+    //         currentBalance = parseInt(currentBalance) + parseInt(data);
+    //         $("#currentBalance").html(accounting.formatMoney(currentBalance));
+    //         balanceUP();
+    //     });
+    //  });
 
       var ticker;
       var recent;
@@ -294,7 +294,7 @@
         com = setInterval(function(){hideCompleted()}, 5000);
       }
       function completePurchase() {
-        //qrcode="2NAqo6t124UY3Kg5acGPzDDnJGSmsULtg14";
+        qrcode="2NAqo6t124UY3Kg5acGPzDDnJGSmsULtg14";
         if (selCoin == "bitcoin") {
             url="https://"+bitcoinpayurl+"/api.php?key="+paykey+"&command=sendFrom&qr="+tqrcode+"&amount="+curAmount+"&type="+selCoin;
         } else {
@@ -323,7 +323,7 @@
 
 
     </script>
-    <title>Coin ATM</title>
+    <title>CriptoCaixa</title>
     <link rel="stylesheet" href="fonts/css/hack.min.css">
     <style>
         html {
@@ -378,13 +378,13 @@
     </style>
   </head>
   <body class="noselect">
-    <div align="center" id="completed">The Transaction is complete!</div>
+    <div align="center" id="completed">Transação completa!</div>
     <div id="container">
-      <div id="left">Balance <span id="currentBalance"></span></div>
-      <div id="right" align="right">Please Insert USD</div>
+      <div id="left">Saldo <span id="currentBalance"></span></div>
+      <div id="right" align="right">Por favor, insira USD</div>
     </div><br /><br />
     <div id="selectCoin">
-      <h1>Select A Currency To Purchase</h1><br />
+      <h1>Selecione a moeda que deseja comprar:</h1><br />
       <div class="button" onClick="selectCoin('bitcoin')"><img src="images/bitcoin_logo.png"></div>
       <div class="button" onClick="selectCoin('litecoin')"><img src="images/litecoin_logo.png"></div>
       <div class="button" onClick="selectCoin('dogecoin')"><img src="images/dogecoin_logo.png"></div>
@@ -393,8 +393,8 @@
       <!--<div class="button" onClick="printWallet('bitcoin');"><img src="images/wallet_logo.png"></div>-->
     </div>
     <div id="allsettings">
-           <div align="center">Settings</div>            
-     <div align="center">IP Address</div>
+           <div align="center">Configurações</div>            
+     <div align="center">Endereço de IP</div>
      <div align="center" id="ipaddress"></div>
      <br />
            <div class="button" onClick="mainScreen()"><img src="images/cancel.png"></div>
@@ -404,8 +404,8 @@
     </div>
     <div id="coinInfo">
         <br><br>
-      <div align="center">You Have Selected <strong><span id="coinSelected"></span></strong> Current Price is: <span id="currentPrice"></span></div>
-      <div align="center">At the current trading price you could buy <span id="amount_per"></amount> bitcoin</div>
+      <div align="center">Moeda selecionada: <strong><span id="coinSelected"></span></strong> O preço atual é: <span id="currentPrice"></span></div>
+      <div align="center">Por esse preço você pode comprar: <span id="amount_per"></amount> bitcoin</div>
           <br><br>
       <div id="buynow">
            <div class="button" onClick="buyNow()"><img src="images/continue.png"></div>
@@ -414,12 +414,12 @@
       <div id="cancelonly" class="button" onClick="mainScreen()"><img src="images/cancel.png"></div>
     </div>
     <div id="getQR">
-      <div align="center"><strong>Please Scan Your QR Code</strong></div>
+      <div align="center"><strong>Por favor, escaneie seu QR Code</strong></div>
       <center><div id="reader" style="width:300px;height:250px; border:2px solid #FFF; margin:8px auto 10px auto;" onClick="stop()"></div></center>
       <div class="button" onClick="mainScreen()"><img src="images/cancel.png"></div>
     </div>
     <div id="gotQR">
-      <div align="center">Your QR Code is: <strong><span id="tqrcode"></span><strong></div>
+      <div align="center">Seu QR Code é: <strong><span id="tqrcode"></span><strong></div>
         <div id="reallybuynow">
             <br><br>
             <div class="button" onClick="completePurchase()"><img src="images/purchase.png"></div>
