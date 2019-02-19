@@ -7,20 +7,20 @@
     <script src="html5-qrcode.js"></script>
     <script>
       currentBalance = 1
-    //   var serialport = require('serialport.node');
-    //   var SerialPort = serialport.SerialPort;
-    //   var sp = new SerialPort("COM4", {
-    //     baudrate: 9600,
-    //     parser: serialport.parsers.readline('\r\n')
-    //   });
-    //   sp.on("open", function () {
-    //     console.log('open');
-    //     sp.on('data', function(data) {
-    //         currentBalance = parseInt(currentBalance) + parseInt(data);
-    //         $("#currentBalance").html(accounting.formatMoney(currentBalance));
-    //         balanceUP();
-    //     });
-    //  });
+      var serialport = require('serialport.node');
+      var SerialPort = serialport.SerialPort;
+      var sp = new SerialPort("COM4", {
+        baudrate: 9600,
+        parser: serialport.parsers.readline('\r\n')
+      });
+      sp.on("open", function () {
+        console.log('open');
+        sp.on('data', function(data) {
+            currentBalance = parseInt(currentBalance) + parseInt(data);
+            $("#currentBalance").html(accounting.formatMoney(currentBalance));
+            balanceUP();
+        });
+     });
 
       var ticker;
       var recent;
